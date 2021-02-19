@@ -21,3 +21,27 @@ Okay, in other words;
 4. The package `ansible` contains the Ansible framework. (ansible==3.*)
 
 Wow, still confusing.
+
+## Adding translations.
+
+The file `from_to.txt` contains lines that map the name of the old module to the new one. For example:
+
+```text
+gluster_volume gluster.gluster.gluster_volume
+```
+
+Feel free to make pull requests to add more mappings.
+
+## Running the script.
+
+Go into the directory of your role and run:
+
+```shell
+/path/to/move_to_collections/move_to_collections.sh
+```
+
+You'll get some output what the script is doing. Feel free to inspect the differences. Here is what you can expect:
+
+1. The `tasks/*.yml` files will be transformed.
+2. The `handlers/main.yml` file will be transformed.
+3. The `requirements.yml` file will list all required collections.
