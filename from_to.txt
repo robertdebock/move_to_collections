@@ -78,7 +78,7 @@ unarchive ansible.builtin.unarchive
 user ansible.builtin.user
 vdo community.general.vdo
 wait_for ansible.builtin.wait_for
-wait_for_connection ansible.builtin.wait_for
+wait_for_connection ansible.builtin.wait_for_connection
 yum ansible.builtin.yum
 yum_repository ansible.builtin.yum_repository
 zabbix_group community.zabbix.zabbix_group
