@@ -16,7 +16,7 @@ replace_flat() {
   # A function to find "flat" short module names and replace with the FQCN.
   grep -v '^#' "$(dirname $0)/from_to_flat.txt" | while read from to ; do
     grep -E "  +${from}:" ${*} > /dev/null && \
-      echo "PLEASE MANUALLY REPLACE ${from} with ${to}." && \
+      echo "PLEASE MANUALLY REPLACE ${from} with ${to} in ${*}."
   done
 }
 
@@ -36,12 +36,10 @@ alter_requirements() {
   fi
 }
 
-echo "Inspecting module names in tasks/*.yml."
 replace tasks/*.yml
 replace_flat tasks/*.yml
 
 if [ -f handlers/main.yml ] ; then
-  echo "Inspecting module names in handlers/main.yml."
   replace handlers/main.yml
   replace_flat handlers/main.yml
 fi

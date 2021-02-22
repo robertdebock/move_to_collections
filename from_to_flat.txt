@@ -1,5 +1,5 @@
 # A list of pairs, left: old-name-of-module, right: new-name-of-module.
-# command ansible.builtin.command
+command ansible.builtin.command
 import_role ansible.builtin.import_role
 # import_tasks ansible.builtin.import_tasks
 include ansible.builtin.include
