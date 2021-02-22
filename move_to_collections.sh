@@ -6,8 +6,17 @@
 replace() {
   # A function to find short module names and replace with the FQCN.
   grep -v '^#' "$(dirname $0)/from_to.txt" | while read from to ; do
-    grep -E "^  ${from}:" ${*} > /dev/null && echo "Replacing ${from} with ${to}."
-    sed -i "s/^  ${from}:/  ${to}:/" ${*}
+    grep -E "  +${from}:$" ${*} > /dev/null && \
+      echo "Replacing ${from} with ${to}." && \
+      sed -Ei "s/^(  +)${from}:$/\1${to}:/" ${*} 
+  done
+}
+
+replace_flat() {
+  # A function to find "flat" short module names and replace with the FQCN.
+  grep -v '^#' "$(dirname $0)/from_to_flat.txt" | while read from to ; do
+    grep -E "  +${from}:" ${*} > /dev/null && \
+      echo "PLEASE MANUALLY REPLACE ${from} with ${to}." && \
   done
 }
 
@@ -29,13 +38,16 @@ alter_requirements() {
 
 echo "Inspecting module names in tasks/*.yml."
 replace tasks/*.yml
+replace_flat tasks/*.yml
 
 if [ -f handlers/main.yml ] ; then
   echo "Inspecting module names in handlers/main.yml."
   replace handlers/main.yml
+  replace_flat handlers/main.yml
 fi
 
 collections=$(grep -v '#' "$(dirname $0)/from_to.txt" | grep -v 'ansible.builtin' | awk '{print $2}' | cut -d. -f1,2 | sort | uniq)
+
 for collection in ${collections} ; do
   alter_requirements ${collection}
 done
