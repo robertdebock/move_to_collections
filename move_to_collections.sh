@@ -22,18 +22,22 @@ replace_flat() {
 
 alter_requirements() {
   # A function to modify requirements.yml.
-  grep ${1} tasks/*.yml handlers/*.yml > /dev/null 2>&1
-  if [ $? = 0 ] ; then
-    grep "^collections:$" requirements.yml > /dev/null 2>&1
-    if [ $? != 0 ] ; then
-      echo "collections:" >> requirements.yml
+  for directory in tasks handlers ; do
+    if [ -d ${directory} ] ; then
+      grep ${1} ${directory}/*.yml > /dev/null 2>&1
+      if [ $? = 0 ] ; then
+        grep "^collections:$" requirements.yml > /dev/null 2>&1
+        if [ $? != 0 ] ; then
+          echo "collections:" >> requirements.yml
+        fi
+        grep "${collection}" requirements.yml > /dev/null 2>&1
+        if [ $? != 0 ] ; then
+          echo "Adding collection ${collection} to requirements.yml."
+          echo "  - name: ${1}" >> requirements.yml
+        fi
+      fi
     fi
-    grep "${collection}" requirements.yml > /dev/null 2>&1
-    if [ $? != 0 ] ; then
-      echo "Adding collection ${collection} to requirements.yml."
-      echo "  - name: ${1}" >> requirements.yml
-    fi
-  fi
+  done
 }
 
 replace tasks/*.yml
