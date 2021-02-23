@@ -7,9 +7,10 @@ apt_repository ansible.builtin.apt_repository
 assert ansible.builtin.assert
 async_status ansible.builtin.async_status
 bigip_device_ntp f5networks.f5_modules.bigip_device_ntp
-bigip_hostname f5networks.f5_modules.hostname
-bigip_node f5networks.f5_modules.node
-bigip_pool f5networks.f5_modules.pool
+bigip_hostname f5networks.f5_modules.bigip_hostname
+bigip_node f5networks.f5_modules.bigip_node
+bigip_pool f5networks.f5_modules.bigip_pool
+bigip_pool_member f5networks.f5_modules.bigip_pool_member
 bigip_virtual_server f5networks.f5_modules.virtual_server
 copy ansible.builtin.copy
 cron ansible.builtin.cron
