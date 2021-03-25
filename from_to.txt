@@ -48,8 +48,8 @@ pam_limits community.general.pam_limits
 pause ansible.builtin.pause
 ping ansible.builtin.ping
 pip ansible.builtin.pip
-postgresql_db ansible.community.postgresql_db
-postgresql_user ansible.community.postgresql_user
+postgresql_db community.postgresql.postgresql_db
+postgresql_user community.postgresql.postgresql_user
 reboot ansible.builtin.reboot
 replace ansible.builtin.replace
 rpm_key ansible.builtin.rpm_key
