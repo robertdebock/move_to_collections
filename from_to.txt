@@ -67,6 +67,7 @@ template ansible.builtin.template
 timezone community.general.timezone
 ufw community.general.ufw
 unarchive ansible.builtin.unarchive
+uri ansible.builtin.uri
 user ansible.builtin.user
 vdo community.general.vdo
 wait_for ansible.builtin.wait_for
