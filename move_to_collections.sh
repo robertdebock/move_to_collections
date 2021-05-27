@@ -34,7 +34,7 @@ replace_flat() {
   # A function to find "flat" short module names and replace with the FQCN.
   grep -v '^#' "$(dirname $0)/from_to_flat.txt" | while read from to ; do
     grep -E "  +${from}:" ${*} > /dev/null && \
-      echo "PLEASE MANUALLY REPLACE ${from} with ${to} in ${*}."
+      echo "Flat style detected, please manually replace ${from} with ${to} in ${*}."
   done
 }
 

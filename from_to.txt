@@ -12,6 +12,7 @@ bigip_node f5networks.f5_modules.bigip_node
 bigip_pool f5networks.f5_modules.bigip_pool
 bigip_pool_member f5networks.f5_modules.bigip_pool_member
 bigip_virtual_server f5networks.f5_modules.virtual_server
+command ansible.builtin.command
 copy ansible.builtin.copy
 cron ansible.builtin.cron
 debconf ansible.builtin.debconf
@@ -24,12 +25,16 @@ file ansible.builtin.file
 filesystem community.general.filesystem
 find ansible.builtin.find
 gem community.general.gem
-getent ansible.builtin.getent
 get_url ansible.builtin.get_url
+getent ansible.builtin.getent
 git ansible.builtin.git
 gluster_volume gluster.gluster.gluster_volume
 group ansible.builtin.group
 hostname ansible.builtin.hostname
+import_role ansible.builtin.import_role
+include_role ansible.builtin.include_role
+include_tasks ansible.builtin.include_tasks
+include_vars ansible.builtin.include_vars
 ini_file community.general.ini_file
 iptables ansible.builtin.iptables
 lineinfile ansible.builtin.lineinfile
@@ -43,8 +48,8 @@ npm community.general.npm
 package ansible.builtin.package
 package_facts ansible.builtin.package_facts
 pacman community.general.pacman
-pamd community.general.pamd
 pam_limits community.general.pam_limits
+pamd community.general.pamd
 pause ansible.builtin.pause
 ping ansible.builtin.ping
 pip ansible.builtin.pip
@@ -60,6 +65,7 @@ service ansible.builtin.service
 service_facts ansible.builtin.service_facts
 set_fact ansible.builtin.set_fact
 setup ansible.builtin.setup
+shell ansible.builtin.shell
 stat ansible.builtin.stat
 sysctl ansible.posix.sysctl
 systemd ansible.builtin.systemd
