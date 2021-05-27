@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# A script to replace (short) Ansible module names to fully qualified collection names.
+# A script to replace (short) Ansible module names to fully qualified
+# collection names. (FQCNs)
 # Run this script from within a role directory.
 
 sedder() {
@@ -31,7 +32,7 @@ replace() {
 }
 
 replace_flat() {
-  # A function to find "flat" short module names and replace with the FQCN.
+  # A function to find "flat" short module names and advise.
   grep -v '^#' "$(dirname $0)/from_to_flat.txt" | while read from to ; do
     grep -E "  +${from}:" ${*} > /dev/null && \
       echo "Flat style detected, please manually replace ${from} with ${to} in ${*}."
