@@ -39,26 +39,6 @@ replace_flat() {
   done
 }
 
-alter_requirements() {
-  # A function to modify requirements.yml.
-  for directory in tasks handlers ; do
-    if [ -d "${directory}" ] ; then
-      grep "${1}" "${directory}/*.yml" > /dev/null 2>&1
-      if [ "$?" = 0 ] ; then
-        grep "^collections:$" requirements.yml > /dev/null 2>&1
-        if [ "$?" != 0 ] ; then
-          echo "collections:" >> requirements.yml
-        fi
-        grep "${collection}" requirements.yml > /dev/null 2>&1
-        if [ "$?" != 0 ] ; then
-          echo "Adding collection ${collection} to requirements.yml."
-          echo "  - name: ${1}" >> requirements.yml
-        fi
-      fi
-    fi
-  done
-}
-
 add_to_file() {
   # A function to add a pattern ($2) to a file ($1) when it's missing.
   file="${1}"
@@ -67,9 +47,29 @@ add_to_file() {
   if [ -f "${file}" ] ; then
     grep -- "${pattern}" "${file}" > /dev/null
     if [ $? != 0 ] ; then
+      echo "Adding ${pattern} to ${file}."
       echo "${pattern}" >> "${file}"
     fi
   fi
+
+}
+
+alter_requirements() {
+  # A function to modify requirements.yml.
+  collection="${1}"
+
+  for directory in tasks handlers ; do
+    if [ -d "${directory}" ] ; then
+      grep "${collection}" "${directory}"/*.yml > /dev/null 2>&1
+      if [ "$?" = 0 ] ; then
+        # Add a header to requirements.yml
+        for pattern in "---" "collections:" ; do
+          add_to_file requirements.yml "${pattern}"
+        done
+        add_to_file requirements.yml "  - name: $collection"
+      fi
+    fi
+  done
 }
 
 alter_collections() {
@@ -77,14 +77,28 @@ alter_collections() {
   collection="${1}"
 
   for scenario in molecule/* ; do
-    for file in "molecule/${scenario}/*" ; do
-      for pattern in "---" "collections:" ; do
-        add_to_file "${scenario}/collections.yml" "${pattern}"
-      done
-      # See if a collection is used, and optionally add it to collections.yml
-      grep "${collection}" "${file}" > /dev/null
-      if [ "${?}" == 0 ] ; then
-        add_to_file "${scenario}/collections.yml"  "  - name: ${collection}"
+    # Add the header to collections.yml.
+    for pattern in "---" "collections:" ; do
+      add_to_file "${scenario}/collections.yml" "${pattern}"
+    done
+
+    # See if a collection is used, and optionally add it to collections.yml
+    for file in "${scenario}/*" ; do
+      if [ -f "${file}" ] ; then
+        grep "${collection}" ${file} > /dev/null
+        if [ "${?}" == 0 ] ; then
+          add_to_file "${scenario}/collections.yml"  "  - name: ${collection}"
+        fi
+      fi
+    done
+
+    # Add the collections found in the role to collections.yml too.
+    for directory in tasks handlers ; do
+      if [ -d "${directory}" ] ; then
+        grep "${collection}" ${directory}/*.yml > /dev/null 2>&1
+        if [ "$?" = 0 ] ; then
+          add_to_file "${scenario}/collections.yml"  "  - name: ${collection}"
+        fi
       fi
     done
   done
@@ -102,7 +116,7 @@ done
 # Collect all listed collections.
 collections=$(grep -v '#' "$(dirname $0)/from_to.txt" | grep -v 'ansible.builtin' | awk '{print $2}' | cut -d. -f1,2 | sort | uniq)
 
-for collection in "${collections}" ; do
+for collection in ${collections} ; do
   alter_requirements "${collection}"
   alter_collections "${collection}"
 done
