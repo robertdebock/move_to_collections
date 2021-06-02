@@ -27,7 +27,7 @@ replace() {
   grep -v '^#' "$(dirname $0)/from_to.txt" | while read from to ; do
     grep -E "  +${from}:$" ${files} > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
-      sedder "s/^(  +)${from}:$/\1${to}:/" ${files} 
+      sedder "s/^(  +)${from}:$/\1${to}:/" ${files}
   done
 }
 
@@ -35,7 +35,8 @@ replace_flat() {
   # A function to find "flat" short module names and advise.
   grep -v '^#' "$(dirname $0)/from_to_flat.txt" | while read from to ; do
     grep -E "  +${from}:" ${*} > /dev/null && \
-      echo "Flat style detected, please manually replace ${from} with ${to} in ${*}."
+      echo "Replacing ${from} with ${to} in ${files}." && \
+      sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" ${files}
   done
 }
 
