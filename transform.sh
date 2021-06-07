@@ -105,8 +105,20 @@ alter_collections() {
   done
 }
 
+finder() {
+  # A function to find all files to inspect.
+  find ./tasks -name '*.yml'
+  echo "handlers/main.yml"
+  for scenario in molecule/* ; do
+    echo "${scenario}/prepare.yml"
+    echo "${scenario}/converge.yml"
+    echo "${scenario}/verify.yml"
+  done
+}
+
 # Loop over files, call 2 functions for each file.
-for file in tasks/*.yml handlers/main.yml molecule/*/prepare.yml molecule/*/converge.yml molecule/*/verify.yml ; do
+# for file in tasks/*.yml handlers/main.yml molecule/*/prepare.yml molecule/*/converge.yml molecule/*/verify.yml ; do
+finder | while read file ; do
   if [ -f "${file}" ] ; then
     for function in replace replace_flat ; do
       "${function}" "${file}"

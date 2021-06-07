@@ -26,6 +26,7 @@ fetch ansible.builtin.fetch
 file ansible.builtin.file
 filesystem community.general.filesystem
 find ansible.builtin.find
+firewalld ansible.posix.firewalld
 gem community.general.gem
 get_url ansible.builtin.get_url
 getent ansible.builtin.getent
