@@ -7,6 +7,7 @@ apt_repository ansible.builtin.apt_repository
 archive community.general.archive
 assert ansible.builtin.assert
 async_status ansible.builtin.async_status
+authorized_key ansible.posix.authorized_key
 bigip_device_ntp f5networks.f5_modules.bigip_device_ntp
 bigip_hostname f5networks.f5_modules.bigip_hostname
 bigip_node f5networks.f5_modules.bigip_node
