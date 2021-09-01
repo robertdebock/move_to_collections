@@ -52,7 +52,6 @@ add_to_file() {
       echo "${pattern}" >> "${file}"
     fi
   fi
-
 }
 
 alter_requirements() {

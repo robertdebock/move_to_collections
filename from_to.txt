@@ -39,10 +39,12 @@ include_role ansible.builtin.include_role
 include_tasks ansible.builtin.include_tasks
 include_vars ansible.builtin.include_vars
 ini_file community.general.ini_file
+ipaddr ansible.netcommon
 iptables ansible.builtin.iptables
 lineinfile ansible.builtin.lineinfile
 lvg community.general.lvg
 lvol community.general.lvol
+lxc_container community.general.lxc_container
 make community.general.make
 meta ansible.builtin.meta
 modprobe community.general.modprobe
