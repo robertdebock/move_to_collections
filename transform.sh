@@ -32,7 +32,7 @@ replace() {
   files="${*}"
 
   grep -v '^#' "${script_dir}/from_to.txt" | while read -r from to ; do
-    grep -E "  +"${from}":$" "${files}" > /dev/null && \
+    grep -E "  +${from}:$" "${files}" > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
       sedder "s/^(  +)${from}:$/\1${to}:/" "${files}"
   done
@@ -41,9 +41,9 @@ replace() {
 replace_flat() {
   # A function to find "flat" short module names and advise.
   grep -v '^#' "${script_dir}/from_to_flat.txt" | while read from to ; do
-    grep -E "  +"${from}":" ${@} > /dev/null && \
+    grep -E "  +${from}: ${@}" > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
-      sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" ${files}
+      sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" "${files}"
   done
 }
 
@@ -88,10 +88,9 @@ alter_collections() {
     done
 
     # See if a collection is used, and optionally add it to collections.yml
-    for file in "${scenario}/*" ; do
+    for file in ${scenario}/* ; do
       if [ -f "${file}" ] ; then
-        grep "${collection}" ${file} > /dev/null
-        if [ "${?}" == 0 ] ; then
+        if grep "${collection}" "${file}" > /dev/null ; then
           add_to_file "${scenario}/collections.yml"  "  - name: ${collection}"
         fi
       fi
@@ -100,8 +99,7 @@ alter_collections() {
     # Add the collections found in the role to collections.yml too.
     for directory in tasks handlers ; do
       if [ -d "${directory}" ] ; then
-        grep "${collection}" ${directory}/*.yml > /dev/null 2>&1
-        if [ "$?" = 0 ] ; then
+        if grep "${collection}" ${directory}/*.yml > /dev/null 2>&1 ; then
           add_to_file "${scenario}/collections.yml"  "  - name: ${collection}"
         fi
       fi
@@ -122,7 +120,7 @@ finder() {
 
 # Loop over files, call 2 functions for each file.
 # for file in tasks/*.yml handlers/main.yml molecule/*/prepare.yml molecule/*/converge.yml molecule/*/verify.yml ; do
-finder | while read file ; do
+finder | while read -r file ; do
   if [ -f "${file}" ] ; then
     for function in replace replace_flat ; do
       "${function}" "${file}"
