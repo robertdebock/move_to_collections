@@ -41,7 +41,7 @@ replace() {
 replace_flat() {
   # A function to find "flat" short module names and advise.
   grep -v '^#' "${script_dir}/from_to_flat.txt" | while read from to ; do
-    grep -E "  +${from}: ${@}" > /dev/null && \
+    grep -E "  +${from}: ${*}" > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
       sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" "${files}"
   done
@@ -88,7 +88,7 @@ alter_collections() {
     done
 
     # See if a collection is used, and optionally add it to collections.yml
-    for file in ${scenario}/* ; do
+    for file in "${scenario}"/* ; do
       if [ -f "${file}" ] ; then
         if grep "${collection}" "${file}" > /dev/null ; then
           add_to_file "${scenario}/collections.yml"  "  - name: ${collection}"
