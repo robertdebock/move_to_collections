@@ -40,7 +40,7 @@ replace() {
 
 replace_flat() {
   # A function to find "flat" short module names and advise.
-  grep -v '^#' "${script_dir}/from_to_flat.txt" | while read from to ; do
+  grep -v '^#' "${script_dir}/from_to_flat.txt" | while read -r from to ; do
     grep -E "  +${from}: ${*}" > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
       sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" "${files}"
