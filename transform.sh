@@ -4,6 +4,13 @@
 # collection names. (FQCNs)
 # Run this script from within a role directory.
 
+# This script ships with two seperate files that are stored in a directory
+# alongisde this script. The following variables ensure that this script can
+# find these accompanying files when it is symlinked to a different directory.
+
+script_path=$(readlink -f "$0")
+script_dir=$(dirname "${script_path}")
+
 sedder() {
   # A function to run sed with the correct syntax based on the operating system.
   pattern="${1}"
@@ -24,7 +31,7 @@ replace() {
   # A function to find short module names and replace with the FQCN.
   files="${*}"
 
-  grep -v '^#' "$(dirname $0)/from_to.txt" | while read from to ; do
+  grep -v '^#' "${script_dir}/from_to.txt" | while read from to ; do
     grep -E "  +${from}:$" ${files} > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
       sedder "s/^(  +)${from}:$/\1${to}:/" ${files}
@@ -33,7 +40,7 @@ replace() {
 
 replace_flat() {
   # A function to find "flat" short module names and advise.
-  grep -v '^#' "$(dirname $0)/from_to_flat.txt" | while read from to ; do
+  grep -v '^#' "${script_dir}/from_to_flat.txt" | while read from to ; do
     grep -E "  +${from}:" ${*} > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
       sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" ${files}
@@ -126,7 +133,7 @@ finder | while read file ; do
 done
 
 # Collect all listed collections.
-collections=$(grep -v '#' "$(dirname $0)/from_to.txt" | grep -v 'ansible.builtin' | awk '{print $2}' | cut -d. -f1,2 | sort | uniq)
+collections=$(grep -v '#' "${script_dir}/from_to.txt" | grep -v 'ansible.builtin' | awk '{print $2}' | cut -d. -f1,2 | sort | uniq)
 
 for collection in ${collections} ; do
   alter_requirements "${collection}"
