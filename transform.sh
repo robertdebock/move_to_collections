@@ -31,17 +31,17 @@ replace() {
   # A function to find short module names and replace with the FQCN.
   files="${*}"
 
-  grep -v '^#' "${script_dir}/from_to.txt" | while read from to ; do
-    grep -E "  +${from}:$" ${files} > /dev/null && \
+  grep -v '^#' "${script_dir}/from_to.txt" | while read -r from to ; do
+    grep -E "  +"${from}":$" "${files}" > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
-      sedder "s/^(  +)${from}:$/\1${to}:/" ${files}
+      sedder "s/^(  +)${from}:$/\1${to}:/" "${files}"
   done
 }
 
 replace_flat() {
   # A function to find "flat" short module names and advise.
   grep -v '^#' "${script_dir}/from_to_flat.txt" | while read from to ; do
-    grep -E "  +${from}:" ${*} > /dev/null && \
+    grep -E "  +"${from}":" ${@} > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
       sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" ${files}
   done
@@ -53,8 +53,7 @@ add_to_file() {
   pattern="${2}"
 
   if [ -f "${file}" ] ; then
-    grep -- "${pattern}" "${file}" > /dev/null
-    if [ $? != 0 ] ; then
+    if ! grep -- "${pattern}" "${file}" > /dev/null ; then
       echo "Adding ${pattern} to ${file}."
       echo "${pattern}" >> "${file}"
     fi
@@ -67,8 +66,7 @@ alter_requirements() {
 
   for directory in tasks handlers ; do
     if [ -d "${directory}" ] ; then
-      grep "${collection}" "${directory}"/*.yml > /dev/null 2>&1
-      if [ "$?" = 0 ] ; then
+      if grep "${collection}" "${directory}"/*.yml > /dev/null 2>&1 ; then
         # Add a header to requirements.yml
         for pattern in "---" "collections:" ; do
           add_to_file requirements.yml "${pattern}"
