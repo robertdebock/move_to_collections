@@ -4,11 +4,29 @@
 # collection names. (FQCNs)
 # Run this script from within a role directory.
 
+# readlink is different on Linux and Mac OS X. This function replaces readlink.
+readlink() {
+  TARGET="${1}"
+  cd $(dirname "${TARGET}")
+  TARGET=$(basename "${TARGET}")
+  while [ -L "${TARGET}" ]
+  do
+      TARGET=$(readlink "${TARGET}")
+      cd $(dirname "${TARGET}")
+      TARGET=$(basename "${TARGET}")
+  done
+  DIR=$(pwd -P)
+  RESULT="${DIR}/${TARGET}"
+  echo "${RESULT}"
+}
+
 # This script ships with two seperate files that are stored in a directory
 # alongisde this script. The following variables ensure that this script can
 # find these accompanying files when it is symlinked to a different directory.
 
-script_path=$(readlink -f "$0")
+# script_path is the full absolute path the script. i.e. /bin/my_script.sh
+script_path=$(readlink "$0")
+# script_dir is the absolute path to the script. i.e. /bin
 script_dir=$(dirname "${script_path}")
 
 sedder() {
