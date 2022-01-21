@@ -46,6 +46,7 @@ lvg community.general.lvg
 lvol community.general.lvol
 lxc_container community.general.lxc_container
 make community.general.make
+mail community.general.mail
 meta ansible.builtin.meta
 modprobe community.general.modprobe
 mount ansible.posix.mount
