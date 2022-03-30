@@ -1,4 +1,5 @@
 # A list of pairs, left: old-name-of-module, right: new-name-of-module.
+acl ansible.posix.acl
 add_host ansible.builtin.add_host
 alternatives community.general.alternatives
 apk community.general.apk
@@ -9,6 +10,7 @@ archive community.general.archive
 assemble ansible.builtin.assemble
 assert ansible.builtin.assert
 async_status ansible.builtin.async_status
+at ansible.posix.at
 authorized_key ansible.posix.authorized_key
 bigip_device_ntp f5networks.f5_modules.bigip_device_ntp
 bigip_hostname f5networks.f5_modules.bigip_hostname
@@ -31,6 +33,7 @@ file ansible.builtin.file
 filesystem community.general.filesystem
 find ansible.builtin.find
 firewalld ansible.posix.firewalld
+firewalld_info ansible.posix.firewalld_info
 gather_facts ansible.builtin.gather_facts
 gem community.general.gem
 getent ansible.builtin.getent
@@ -79,6 +82,7 @@ pacman community.general.pacman
 pamd community.general.pamd
 pam_limits community.general.pam_limits
 parted community.general.parted
+patch ansible.posix.patch
 pause ansible.builtin.pause
 ping ansible.builtin.ping
 pip ansible.builtin.pip
@@ -101,6 +105,7 @@ shell ansible.builtin.shell
 slurp ansible.builtin.slurp
 stat ansible.builtin.stat
 subversion ansible.builtin.subversion
+synchronize ansible.posix.synchronize
 sysctl ansible.posix.sysctl
 systemd ansible.builtin.systemd
 sysvinit ansible.builtin.sysvinit
