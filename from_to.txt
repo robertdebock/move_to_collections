@@ -1,4 +1,5 @@
 # A list of pairs, left: old-name-of-module, right: new-name-of-module.
+acl ansible.posix.acl
 alternatives community.general.alternatives
 apk community.general.apk
 apt ansible.builtin.apt
@@ -7,6 +8,7 @@ apt_repository ansible.builtin.apt_repository
 archive community.general.archive
 assert ansible.builtin.assert
 async_status ansible.builtin.async_status
+at ansible.posix.at
 authorized_key ansible.posix.authorized_key
 bigip_device_ntp f5networks.f5_modules.bigip_device_ntp
 bigip_hostname f5networks.f5_modules.bigip_hostname
@@ -27,9 +29,10 @@ file ansible.builtin.file
 filesystem community.general.filesystem
 find ansible.builtin.find
 firewalld ansible.posix.firewalld
+firewalld_info ansible.posix.firewalld_info
 gem community.general.gem
-get_url ansible.builtin.get_url
 getent ansible.builtin.getent
+get_url ansible.builtin.get_url
 git ansible.builtin.git
 gluster_volume gluster.gluster.gluster_volume
 group ansible.builtin.group
@@ -45,8 +48,8 @@ lineinfile ansible.builtin.lineinfile
 lvg community.general.lvg
 lvol community.general.lvol
 lxc_container community.general.lxc_container
-make community.general.make
 mail community.general.mail
+make community.general.make
 meta ansible.builtin.meta
 modprobe community.general.modprobe
 mount ansible.posix.mount
@@ -66,9 +69,10 @@ openssl_signature_info community.crypto.openssl_signature_info
 package ansible.builtin.package
 package_facts ansible.builtin.package_facts
 pacman community.general.pacman
-pam_limits community.general.pam_limits
 pamd community.general.pamd
+pam_limits community.general.pam_limits
 parted community.general.parted
+patch ansible.posix.patch
 pause ansible.builtin.pause
 ping ansible.builtin.ping
 pip ansible.builtin.pip
@@ -87,6 +91,7 @@ setup ansible.builtin.setup
 shell ansible.builtin.shell
 slurp ansible.builtin.slurp
 stat ansible.builtin.stat
+synchronize ansible.posix.synchronize
 sysctl ansible.posix.sysctl
 systemd ansible.builtin.systemd
 template ansible.builtin.template
