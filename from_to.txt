@@ -75,7 +75,12 @@ meta ansible.builtin.meta
 modprobe community.general.modprobe
 mount ansible.posix.mount
 mysql_db community.mysql.mysql_db
+mysql_info community.mysql.mysql_info
+mysql_query community.mysql.mysql_query
+mysql_replication community.mysql.mysql_replication
+mysql_role community.mysql.mysql_role
 mysql_user community.mysql.mysql_user
+mysql_variables community.mysql.mysql_variables
 npm community.general.npm
 openssh_cert community.crypto.openssh_cert
 openssh_keypair community.crypto.openssh_keypair
