@@ -19,6 +19,9 @@ bigip_pool f5networks.f5_modules.bigip_pool
 bigip_pool_member f5networks.f5_modules.bigip_pool_member
 bigip_virtual_server f5networks.f5_modules.virtual_server
 blockinfile ansible.builtin.blockinfile
+cli_command ansible.netcommon.cli_command
+cli_config ansible.netcommon.cli_config
+cli_parse ansible.netcommon.cli_parse
 command ansible.builtin.command
 copy ansible.builtin.copy
 cron ansible.builtin.cron
@@ -65,6 +68,13 @@ modprobe community.general.modprobe
 mount ansible.posix.mount
 mysql_db community.mysql.mysql_db
 mysql_user community.mysql.mysql_user
+netconf_config ansible.netcommon.netconf_config
+netconf_get ansible.netcommon.netconf_get
+netconf_rpc ansible.netcommon.netconf_rpc
+net_get ansible.netcommon.net_get
+net_ping ansible.netcommon.net_ping
+net_put ansible.netcommon.net_put
+network_resource ansible.netcommon.network_resource
 npm community.general.npm
 openssl_certificate community.crypto.openssl_certificate
 openssl_csr community.crypto.openssl_csr
@@ -91,6 +101,8 @@ postgresql_user community.postgresql.postgresql_user
 raw ansible.builtin.raw
 reboot ansible.builtin.reboot
 replace ansible.builtin.replace
+restconf_config ansible.netcommon.restconf_config
+restconf_get ansible.netcommon.restconf_get
 rpm_key ansible.builtin.rpm_key
 script ansible.builtin.script
 seboolean ansible.posix.seboolean
@@ -109,6 +121,7 @@ synchronize ansible.posix.synchronize
 sysctl ansible.posix.sysctl
 systemd ansible.builtin.systemd
 sysvinit ansible.builtin.sysvinit
+telnet ansible.netcommon.telnet
 tempfile ansible.builtin.tempfile
 template ansible.builtin.template
 timezone community.general.timezone
