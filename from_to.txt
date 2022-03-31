@@ -1,5 +1,11 @@
 # A list of pairs, left: old-name-of-module, right: new-name-of-module.
 acl ansible.posix.acl
+acme_account community.crypto.acme_account
+acme_account_info community.crypto.acme_account_info
+acme_certificate community.crypto.acme_certificate
+acme_certificate_revoke community.crypto.acme_certificate_revoke
+acme_challenge_cert_helper community.crypto.acme_challenge_cert_helper
+acme_inspect community.crypto.acme_inspect
 add_host ansible.builtin.add_host
 alternatives community.general.alternatives
 apk community.general.apk
@@ -19,6 +25,7 @@ bigip_pool f5networks.f5_modules.bigip_pool
 bigip_pool_member f5networks.f5_modules.bigip_pool_member
 bigip_virtual_server f5networks.f5_modules.virtual_server
 blockinfile ansible.builtin.blockinfile
+certificate_complete_chain community.crypto.certificate_complete_chain
 command ansible.builtin.command
 copy ansible.builtin.copy
 cron ansible.builtin.cron
@@ -26,6 +33,8 @@ debconf ansible.builtin.debconf
 debug ansible.builtin.debug
 dnf ansible.builtin.dnf
 dpkg_selections ansible.builtin.dpkg_selections
+ecs_certificate community.crypto.ecs_certificate
+ecs_domain community.crypto.ecs_domain
 expect ansible.builtin.expect
 fail ansible.builtin.fail
 fetch ansible.builtin.fetch
@@ -36,6 +45,7 @@ firewalld ansible.posix.firewalld
 firewalld_info ansible.posix.firewalld_info
 gather_facts ansible.builtin.gather_facts
 gem community.general.gem
+get_certificate community.crypto.get_certificate
 getent ansible.builtin.getent
 get_url ansible.builtin.get_url
 git ansible.builtin.git
@@ -55,6 +65,7 @@ ipaddr ansible.netcommon
 iptables ansible.builtin.iptables
 known_hosts ansible.builtin.known_hosts
 lineinfile ansible.builtin.lineinfile
+luks_device community.crypto.luks_device
 lvg community.general.lvg
 lvol community.general.lvol
 lxc_container community.general.lxc_container
@@ -66,14 +77,19 @@ mount ansible.posix.mount
 mysql_db community.mysql.mysql_db
 mysql_user community.mysql.mysql_user
 npm community.general.npm
+openssh_cert community.crypto.openssh_cert
+openssh_keypair community.crypto.openssh_keypair
 openssl_certificate community.crypto.openssl_certificate
 openssl_csr community.crypto.openssl_csr
 openssl_csr_info community.crypto.openssl_csr_info
+openssl_csr_pipe community.crypto.openssl_csr_pipe
 openssl_dhparam community.crypto.openssl_dhparam
 openssl_pkcs12 community.crypto.openssl_pkcs12
 openssl_privatekey community.crypto.openssl_privatekey
 openssl_privatekey_info community.crypto.openssl_privatekey_info
+openssl_privatekey_pipe community.crypto.openssl_privatekey_pipe
 openssl_publickey community.crypto.openssl_publickey
+openssl_publickey_info community.crypto.openssl_publickey_info
 openssl_signature community.crypto.openssl_signature
 openssl_signature_info community.crypto.openssl_signature_info
 package ansible.builtin.package
@@ -120,6 +136,11 @@ validate_argument_spec ansible.builtin.validate_argument_spec
 vdo community.general.vdo
 wait_for ansible.builtin.wait_for
 wait_for_connection ansible.builtin.wait_for_connection
+x509_certificate community.crypto.x509_certificate
+x509_certificate_info community.crypto.x509_certificate_info
+x509_certificate_pipe community.crypto.x509_certificate_pipe
+x509_crl community.crypto.x509_crl
+x509_crl_info community.crypto.x509_crl_info
 yum ansible.builtin.yum
 yum_repository ansible.builtin.yum_repository
 zabbix_group community.zabbix.zabbix_group
