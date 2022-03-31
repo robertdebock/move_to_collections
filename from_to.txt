@@ -19,6 +19,7 @@ bigip_pool f5networks.f5_modules.bigip_pool
 bigip_pool_member f5networks.f5_modules.bigip_pool_member
 bigip_virtual_server f5networks.f5_modules.virtual_server
 blockinfile ansible.builtin.blockinfile
+cli_parse ansible.utils.cli_parse
 command ansible.builtin.command
 copy ansible.builtin.copy
 cron ansible.builtin.cron
@@ -27,6 +28,7 @@ debug ansible.builtin.debug
 dnf ansible.builtin.dnf
 dpkg_selections ansible.builtin.dpkg_selections
 expect ansible.builtin.expect
+fact_diff ansible.utils.fact_diff
 fail ansible.builtin.fail
 fetch ansible.builtin.fetch
 file ansible.builtin.file
@@ -114,8 +116,10 @@ template ansible.builtin.template
 timezone community.general.timezone
 ufw community.general.ufw
 unarchive ansible.builtin.unarchive
+update_fact ansible.utils.update_fact
 uri ansible.builtin.uri
 user ansible.builtin.user
+validate ansible.utils.validate
 validate_argument_spec ansible.builtin.validate_argument_spec
 vdo community.general.vdo
 wait_for ansible.builtin.wait_for
