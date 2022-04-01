@@ -85,6 +85,8 @@ alter_requirements() {
   for directory in tasks handlers ; do
     if [ -d "${directory}" ] ; then
       if grep "${collection}" "${directory}"/*.yml > /dev/null 2>&1 ; then
+        # Ensure requirements.yml exists
+        touch requirements.yml
         # Add a header to requirements.yml
         for pattern in "---" "collections:" ; do
           add_to_file requirements.yml "${pattern}"
