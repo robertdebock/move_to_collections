@@ -151,5 +151,5 @@ collections=$(grep -v '#' "${script_dir}/from_to.txt" | grep -v 'ansible.builtin
 
 for collection in ${collections} ; do
   alter_requirements "${collection}"
-  alter_collections "${collection}"
+  # alter_collections "${collection}"
 done
