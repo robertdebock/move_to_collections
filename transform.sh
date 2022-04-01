@@ -128,9 +128,11 @@ alter_collections() {
 }
 
 finder() {
-  # A function to find all files to inspect.
-  find ./tasks -name '*.yml'
-  echo "handlers/main.yml"
+  # A function to find all YAML files to inspect.
+  # https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#id2 reads main, main.yml and main.yaml are valid file names
+  find ./tasks -name '*.yml' -o -name '*.yaml' -o -name 'main'
+  # It's valid to split the main file into several file ans include them
+  find ./handlers -name '*.yml' -o -name '*.yaml' -o -name 'main'
   for scenario in molecule/* ; do
     echo "${scenario}/prepare.yml"
     echo "${scenario}/converge.yml"
