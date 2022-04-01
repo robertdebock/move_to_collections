@@ -415,7 +415,6 @@ ipa_sudocmdgroup community.general.ipa_sudocmdgroup
 ipa_sudorule community.general.ipa_sudorule
 ipa_user community.general.ipa_user
 ipa_vault community.general.ipa_vault
-ipaddr ansible.netcommon
 ipify_facts community.general.ipify_facts
 ipinfoio_facts community.general.ipinfoio_facts
 ipmi_boot community.general.ipmi_boot
