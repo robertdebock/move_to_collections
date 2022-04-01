@@ -7,12 +7,12 @@
 # readlink is different on Linux and Mac OS X. This function replaces readlink.
 readlink() {
   TARGET="${1}"
-  cd $(dirname "${TARGET}")
+  cd "$(dirname "${TARGET}")" || exit
   TARGET=$(basename "${TARGET}")
   while [ -L "${TARGET}" ]
   do
       TARGET=$(readlink "${TARGET}")
-      cd $(dirname "${TARGET}")
+      cd "$(dirname "${TARGET}")" || exit
       TARGET=$(basename "${TARGET}")
   done
   DIR=$(pwd -P)
