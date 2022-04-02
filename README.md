@@ -16,7 +16,7 @@ Ansible has changed a lot in the last few releases. It's a bit confusing, so her
 Okay, in other words;
 
 1. There was a package called `ansible` including everything. (ansible<=2.7)
-2. The package `ansible` contained only collections, not the framework. The framework in in `ansible-base`, which is a dependency of `ansible`. (ansible>=2.10<=3)
+2. The package `ansible` contained only collections, not the framework. The framework is in `ansible-base`, which is a dependency of `ansible`. (ansible>=2.10<=3)
 3. The package `ansible-core` contains the Ansible framework. (ansible==2.11)
 4. The package `ansible` contains the Ansible framework. (ansible==3.*)
 
