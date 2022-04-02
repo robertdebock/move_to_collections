@@ -37,7 +37,7 @@ Feel free to make pull requests to add more mappings.
 Go into the directory of your role and run:
 
 ```shell
-/path/to/move_to_collections/move_to_collections.sh
+/path/to/move_to_collections/transform.sh
 ```
 
 You'll get some output what the script is doing. Feel free to inspect the differences. Here is what you can expect:
