@@ -6,6 +6,7 @@ acme_certificate community.crypto.acme_certificate
 acme_certificate_revoke community.crypto.acme_certificate_revoke
 acme_challenge_cert_helper community.crypto.acme_challenge_cert_helper
 acme_inspect community.crypto.acme_inspect
+adaptive_response_notable_event splunk.es.adaptive_response_notable_event
 add_host ansible.builtin.add_host
 aerospike_migrations community.general.aerospike_migrations
 airbrake_deployment community.general.airbrake_deployment
@@ -256,6 +257,8 @@ consul_kv community.general.consul_kv
 consul_session community.general.consul_session
 copr community.general.copr
 copy ansible.builtin.copy
+correlation_search_info splunk.es.correlation_search_info
+correlation_search splunk.es.correlation_search
 cpanm community.general.cpanm
 cron ansible.builtin.cron
 cronvar community.general.cronvar
@@ -263,6 +266,8 @@ crypttab community.general.crypttab
 datadog_downtime community.general.datadog_downtime
 datadog_event community.general.datadog_event
 datadog_monitor community.general.datadog_monitor
+data_input_monitor splunk.es.data_input_monitor
+data_input_network splunk.es.data_input_network
 dconf community.general.dconf
 debconf ansible.builtin.debconf
 debug ansible.builtin.debug
