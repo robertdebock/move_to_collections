@@ -84,7 +84,9 @@ alter_requirements() {
 
   for directory in tasks handlers ; do
     if [ -d "${directory}" ] ; then
-      if grep "${collection}" "${directory}"/*.yml > /dev/null 2>&1 ; then
+      if grep -r "${collection}" --include \*.yml --include \*.yaml "${directory}" > /dev/null 2>&1 ; then
+        # Ensure requirements.yml exists
+        touch requirements.yml
         # Add a header to requirements.yml
         for pattern in "---" "collections:" ; do
           add_to_file requirements.yml "${pattern}"
@@ -126,9 +128,11 @@ alter_collections() {
 }
 
 finder() {
-  # A function to find all files to inspect.
-  find ./tasks -name '*.yml'
-  echo "handlers/main.yml"
+  # A function to find all YAML files to inspect.
+  # https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#id2 reads main, main.yml and main.yaml are valid file names
+  find ./tasks -name '*.yml' -o -name '*.yaml' -o -name 'main'
+  # It's valid to split the main file into several file ans include them
+  find ./handlers -name '*.yml' -o -name '*.yaml' -o -name 'main'
   for scenario in molecule/* ; do
     echo "${scenario}/prepare.yml"
     echo "${scenario}/converge.yml"
