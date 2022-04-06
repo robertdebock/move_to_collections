@@ -131,7 +131,7 @@ finder() {
   # A function to find all YAML files to inspect.
   # https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#id2 reads main, main.yml and main.yaml are valid file names
   find ./tasks -name '*.yml' -o -name '*.yaml' -o -name 'main'
-  # It's valid to split the main file into several file ans include them
+  # It's valid to split the main file into several files and include them
   find ./handlers -name '*.yml' -o -name '*.yaml' -o -name 'main'
   for scenario in molecule/* ; do
     echo "${scenario}/prepare.yml"
@@ -141,7 +141,7 @@ finder() {
 }
 
 # Loop over files, call 2 functions for each file.
-# for file in tasks/*.yml handlers/main.yml molecule/*/prepare.yml molecule/*/converge.yml molecule/*/verify.yml ; do
+# for file in tasks/*.yml tasks/*.yaml tasks/main handlers/*.yml handlers/*.yaml handler/main molecule/*/prepare.yml molecule/*/converge.yml molecule/*/verify.yml ; do
 finder | while read -r file ; do
   if [ -f "${file}" ] ; then
     for function in replace replace_flat ; do
