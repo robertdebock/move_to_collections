@@ -59,7 +59,7 @@ replace() {
 replace_flat() {
   # A function to find "flat" short module names and advise.
   grep -v '^#' "${script_dir}/from_to_flat.txt" | while read -r from to ; do
-    grep -E "  +${from}: ${*}" > /dev/null && \
+    grep -E "  +${from}:" "${*}" > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
       sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" "${files}"
   done
@@ -140,8 +140,7 @@ finder() {
   done
 }
 
-# Loop over files, call 2 functions for each file.
-# for file in tasks/*.yml tasks/*.yaml tasks/main handlers/*.yml handlers/*.yaml handler/main molecule/*/prepare.yml molecule/*/converge.yml molecule/*/verify.yml ; do
+# Loop over found YAML files, call 2 functions for each file.
 finder | while read -r file ; do
   if [ -f "${file}" ] ; then
     for function in replace replace_flat ; do
