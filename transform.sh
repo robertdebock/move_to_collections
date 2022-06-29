@@ -132,7 +132,9 @@ finder() {
   # https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#id2 reads main, main.yml and main.yaml are valid file names
   find ./tasks -name '*.yml' -o -name '*.yaml' -o -name 'main'
   # It's valid to split the main file into several files and include them
-  find ./handlers -name '*.yml' -o -name '*.yaml' -o -name 'main'
+  if [ -d handlers ] ; then
+    find ./handlers -name '*.yml' -o -name '*.yaml' -o -name 'main'
+  fi
   for scenario in molecule/* ; do
     echo "${scenario}/prepare.yml"
     echo "${scenario}/converge.yml"
