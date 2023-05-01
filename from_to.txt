@@ -900,6 +900,14 @@ webfaction_db community.general.webfaction_db
 webfaction_domain community.general.webfaction_domain
 webfaction_mailbox community.general.webfaction_mailbox
 webfaction_site community.general.webfaction_site
+win_file ansible.windows.win_file
+win_command ansible.windows.win_command
+win_copy ansible.windows.win_copy
+win_get_url ansible.windows.win_get_url
+win_package ansible.windows.win_package
+win_regedit ansible.windows.win_regedit
+win_scheduled_task ansible.windows.win_scheduled_task
+win_stat ansible.windows.win_stat
 x509_certificate community.crypto.x509_certificate
 x509_certificate_info community.crypto.x509_certificate_info
 x509_certificate_pipe community.crypto.x509_certificate_pipe
