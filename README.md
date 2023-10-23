@@ -45,3 +45,8 @@ You'll get some output what the script is doing. Feel free to inspect the differ
 1. The `tasks/*.yml` files will be transformed.
 2. The `handlers/main.yml` file will be transformed.
 3. The `requirements.yml` file will list all required collections.
+
+
+## See also
+
+https://www.youtube.com/watch?v=jOXiSaHbZVk
