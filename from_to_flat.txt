@@ -2,3 +2,4 @@
 import_tasks ansible.builtin.import_tasks
 include ansible.builtin.include
 raw ansible.builtin.raw
+meta ansible.builtin.meta

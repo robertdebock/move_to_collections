@@ -59,7 +59,7 @@ replace() {
 replace_flat() {
   # A function to find "flat" short module names and advise.
   grep -v '^#' "${script_dir}/from_to_flat.txt" | while read -r from to ; do
-    grep -E "  +${from}: ${*}" > /dev/null && \
+    grep -E "  +${from}:" "${*}" > /dev/null && \
       echo "Replacing ${from} with ${to} in ${files}." && \
       sedder "s/^(  +)${from}:(.*)$/\1${to}:\2/" "${files}"
   done
@@ -131,8 +131,10 @@ finder() {
   # A function to find all YAML files to inspect.
   # https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#id2 reads main, main.yml and main.yaml are valid file names
   find ./tasks -name '*.yml' -o -name '*.yaml' -o -name 'main'
-  # It's valid to split the main file into several file ans include them
-  find ./handlers -name '*.yml' -o -name '*.yaml' -o -name 'main'
+  # It's valid to split the main file into several files and include them
+  if [ -d handlers ] ; then
+    find ./handlers -name '*.yml' -o -name '*.yaml' -o -name 'main'
+  fi
   for scenario in molecule/* ; do
     echo "${scenario}/prepare.yml"
     echo "${scenario}/converge.yml"
@@ -140,8 +142,7 @@ finder() {
   done
 }
 
-# Loop over files, call 2 functions for each file.
-# for file in tasks/*.yml handlers/main.yml molecule/*/prepare.yml molecule/*/converge.yml molecule/*/verify.yml ; do
+# Loop over found YAML files, call 2 functions for each file.
 finder | while read -r file ; do
   if [ -f "${file}" ] ; then
     for function in replace replace_flat ; do
