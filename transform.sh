@@ -24,7 +24,7 @@ readlink() {
 # formatted files. This functions tests if UNIX-formatted files are used.
 test_unix_file() {
   file="${1}"
-  file $file | grep -vq "ASCII text, with CRLF line terminators" || (echo "The file $file is not UNIX-formatted, skipping." ; exit 1)
+  file "${file}" | grep -vq "ASCII text, with CRLF line terminators" || (echo "The file $file is not UNIX-formatted, skipping." ; exit 1)
 }
 
 # This script ships with two seperate files that are stored in a directory
